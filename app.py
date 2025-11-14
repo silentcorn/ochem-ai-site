@@ -6,4 +6,4 @@ from DECIMER import predict_SMILES
 
 # To do: ...
 
-#test
+#testing
