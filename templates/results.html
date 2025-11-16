@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Results</h1>
+
+{% if error %}
+    <p class="error">{{ error }}</p>
+{% endif %}
+
+{% if smiles %}
+    <p><strong>Input SMILES:</strong> {{ smiles }}</p>
+{% endif %}
+
+{% if output_images %}
+    <h2>Generated Structures</h2>
+    <div class="img-grid">
+        {% for img in output_images %}
+        <img src="{{ url_for('static', filename='results/' + img) }}" alt="Generated image">
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if predictions %}
+    <h2>Predicted Data</h2>
+    <ul>
+    {% for name, value in predictions.items() %}
+    <li><strong>{{ name }}:</strong> {{ value }}</li>
+    {% endfor %}
+    </ul> 
+{% endif %}
+
+<a href="{{ url_for('index') }}"> Run Another Prediction</a>
+{% endblock %}

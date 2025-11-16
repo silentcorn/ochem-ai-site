@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Ochem resonance structure predictor</h1>
+<p>Upload a molecule image or enter a SMILES string below.</p>
+
+<form action="{{ url_for('results') }}" method="POST" enctype="multipart/form-data">
+
+    <label for="smiles">SMILES String:</label>
+    <input type="text" id="smiles" name="smiles" placeholder="Enter SMILES">
+
+    <p>or</p>
+
+    <label for="image">Upload molecule image:</label>
+    <input type="file" id="image" name="image">
+    <button type="submit">Analyze</button>
+
+</form>
+
+{% endblock %}

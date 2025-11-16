@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ochem.AI - Applying AI algorithms to Chemistry</title>
+    
+    <!--link to my css sheet-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+
+    <!--navigation bar-->
+    <nav class="navbar">
+        <div class="container">
+            <a href="{{ url_for('index') }}" class="logo">Ochem.AI</a>
+        </div>
+    </nav>
+
+    <!--main content area-->
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>
