@@ -11,7 +11,7 @@ import os
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = "/static/uploads"
+UPLOAD_FOLDER = "static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -29,9 +29,9 @@ def results():
     smiles = None
     output_images = []
     predictions = {}
+    resonance_structs = []
 
-    folder = app.config['UPLOAD_FOLDER']
-
+    
     if request.method == "POST":
         # Get smiles input
         smiles = request.form.get("smiles")
@@ -44,8 +44,10 @@ def results():
         if smiles and smiles.strip() != "":
             mol = Chem.MolFromSmiles(smiles)
             # Generate resonance structures
-            resonance_structs = [m for m in Chem.ResonanceMolSupplier(mol)]
-            
+            if mol:
+                resonance_structs = [m for m in Chem.ResonanceMolSupplier(mol)]
+            else:
+                error = "Invalid SMILES String or no alternate resonance structs"
         elif file:
             if file and file.filename != "":
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
@@ -55,7 +57,14 @@ def results():
                 # example: output_images.append(filepath)
 
             smiles = predict_SMILES(filepath)
+
             mol = Chem.MolFromSmiles(smiles)
+            
+            if mol:
+                resonance_structs = [m for m in Chem.ResonanceMolSupplier(mol)]
+            else:
+                error = "invalid smiles, image, or no alt res structs"
+
 
         filenames = []
         for i, res_mol in enumerate(resonance_structs):
@@ -64,7 +73,9 @@ def results():
             drawer.FinishDrawing()
             svg = drawer.GetDrawingText()
             filename = f"resonance_{i}.svg"
-            filepath = os.path.join(folder, file.filename)
+            
+
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             #save svg
 
             with open(filepath, "w") as f:
