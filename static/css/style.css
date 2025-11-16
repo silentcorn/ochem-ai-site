@@ -77,3 +77,14 @@ h1, h2, h3 {
     border-radius: 8px;       /* optional: rounded corners */
     background: #f9f9f9;      /* optional: light background */
 }
+
+
+.beta-badge {
+    font-size: 0.6rem;           /* smaller text */
+    color: white;                /* text color */
+    background-color: #ff4d4f;   /* bright red/pink background */
+    padding: 2px 6px;            /* small padding */
+    border-radius: 4px;          /* rounded corners */
+    margin-left: 5px;            /* space from site name */
+    vertical-align: super;       /* aligns it nicely with text */
+}
