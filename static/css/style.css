@@ -61,3 +61,19 @@ img {
 h1, h2, h3 {
     color: #1F1F1F;
 }
+
+
+.img-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;           /* space between images */
+    justify-content: flex-start;
+}
+
+.img-grid svg {
+    width: 300px;        /* or adjust to your desired size */
+    height: 300px;
+    border: 1px solid #ddd;  /* optional: light border */
+    border-radius: 8px;       /* optional: rounded corners */
+    background: #f9f9f9;      /* optional: light background */
+}

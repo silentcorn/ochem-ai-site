@@ -15,7 +15,7 @@
     <h2>Generated Structures</h2>
     <div class="img-grid">
         {% for img in output_images %}
-        <img src="{{ url_for('static', filename='uploads/' + img) }}" alt="Generated image">
+            {{ img | safe }}
         {% endfor %}
     </div>
 {% endif %}

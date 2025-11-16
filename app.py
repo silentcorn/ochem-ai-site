@@ -4,6 +4,7 @@ from rdkit.Chem import Draw
 from rdkit.Chem.Draw import rdMolDraw2D
 from DECIMER import predict_SMILES
 import os
+import uuid
 # To do: ...
 
 #testing again
@@ -50,14 +51,15 @@ def results():
                 error = "Invalid SMILES String or no alternate resonance structs"
         elif file:
             if file and file.filename != "":
-                filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+                unique_name = f"{uuid.uuid4().hex}_{file.filename}"
+                filepath = os.path.join(app.config['UPLOAD_FOLDER'], unique_name)
                 file.save(filepath)
 
                 # Now filepath can be used in your python logic
                 # example: output_images.append(filepath)
 
             smiles = predict_SMILES(filepath)
-
+            os.remove(filepath)
             mol = Chem.MolFromSmiles(smiles)
             
             if mol:
@@ -66,21 +68,13 @@ def results():
                 error = "invalid smiles, image, or no alt res structs"
 
 
-        filenames = []
+  
         for i, res_mol in enumerate(resonance_structs):
             drawer = rdMolDraw2D.MolDraw2DSVG(300,300)
             rdMolDraw2D.PrepareAndDrawMolecule(drawer, res_mol)
             drawer.FinishDrawing()
             svg = drawer.GetDrawingText()
-            filename = f"resonance_{i}.svg"
-            
-
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            #save svg
-
-            with open(filepath, "w") as f:
-                f.write(svg)
-            output_images.append(filename)
+            output_images.append(svg)
 
 
 
