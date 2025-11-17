@@ -1,29 +1,33 @@
-# Use an official Python base image
-FROM python:3.11-slim
+# Use a python base
+FROM python:3.10-slim
 
-# Install system dependencies for RDKit, OpenCV, DECIMER
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    cmake \
-    git \
-    wget \
-    libgl1 \
+# Install system dependencies required by RDKit, TensorFlow, OpenCV, DECIMER
+RUN apt-get update && apt-get install -y \
+    libxrender1 \
+    libxext6 \
+    libsm6 \
     libglib2.0-0 \
-    && rm -rf /var/lib/apt/lists/*
+    libgl1 \
+    libfreetype6 \
+    libpng16-16 \
+    openjdk-11-jre \
+    tesseract-ocr \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
+# Create app dir
 WORKDIR /app
 
-# Copy requirements.txt and install Python dependencies
+# Copy requirements
 COPY requirements.txt .
-RUN pip install --no-cache-dir --upgrade pip
+
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the app code
+# Copy your app code
 COPY . .
 
-# Expose the port Render expects
+# Expose Render port
 ENV PORT=10000
 
-# Run the app with Gunicorn
+# Run Gunicorn
 CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]

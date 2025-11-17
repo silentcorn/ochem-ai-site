@@ -84,7 +84,6 @@ def results():
                            output_images=output_images,
                            predictions=predictions)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
 
 
