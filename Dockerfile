@@ -36,7 +36,7 @@ COPY . /app
 # Copy the rest of the app
 COPY . .
 # Expose is optional, just for documentation
-EXPOSE 10000
+EXPOSE 5000
 
 # Use shell form to expand $PORT
 CMD gunicorn --bind 0.0.0.0:$PORT app:app
