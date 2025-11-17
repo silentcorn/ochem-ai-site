@@ -18,6 +18,10 @@ RUN apt-get update && apt-get install -y \
 # RDKit from PyPI, TensorFlow CPU, Flask, DECIMER dependencies
 RUN pip install --upgrade pip
 RUN pip install rdkit-pypi tensorflow-cpu flask pillow numpy
+RUN pip install gunicorn
+
+# Install DECIMER (via pip)
+RUN pip install decimer  # DECIMER PyPI package
 
 # Copy your project files
 WORKDIR /app
