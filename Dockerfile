@@ -35,6 +35,8 @@ WORKDIR /app
 COPY . /app
 # Copy the rest of the app
 COPY . .
-# Expose the port Render will use
-ENV PORT=10000
-CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
+# Expose is optional, just for documentation
+EXPOSE 10000
+
+# Use shell form to expand $PORT
+CMD gunicorn --bind 0.0.0.0:$PORT app:app
