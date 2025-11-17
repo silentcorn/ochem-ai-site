@@ -1,8 +1,8 @@
-Flask==2.3.4
-gunicorn==23.2.0
-numpy==1.26.5
-pillow==10.1.0
-rdkit-pypi==2023.9.5
-tensorflow==2.15.0
-opencv-python-headless==4.8.1.78
+flask
+gunicorn
+numpy
+pillow
+rdkit-pypi
+tensorflow
+opencv-python-headless
 decimer==2.7.1  # Replace with exact DECIMER version you are using
