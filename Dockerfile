@@ -36,6 +36,5 @@ COPY . /app
 # Copy the rest of the app
 COPY . .
 # Expose the port Render will use
-EXPOSE $PORT
-# Run your app with Gunicorn for production
-CMD gunicorn --bind 0.0.0.0:$PORT app:app
+ENV PORT=10000
+CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
