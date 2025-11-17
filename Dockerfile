@@ -38,4 +38,4 @@ COPY . /app
 EXPOSE 10000
 
 # Run your app with Gunicorn for production
-CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:{PORT}", "app:app"]
