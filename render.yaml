@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: ochem-ai
-    env: docker
-    dockerfilePath: ./Dockerfile
-    plan: free
-    autoDeploy: true
-    port: 10000
