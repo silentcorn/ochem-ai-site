@@ -14,6 +14,13 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    libgl1 \
+    libglib2.0-0 \
+ && rm -rf /var/lib/apt/lists/*
+
+
 # Install Python packages
 # RDKit from PyPI, TensorFlow CPU, Flask, DECIMER dependencies
 RUN pip install --upgrade pip
