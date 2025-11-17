@@ -1,42 +1,29 @@
-# Use Python 3.10 for RDKit + TensorFlow compatibility
-FROM python:3.10-slim
+# Use an official Python base image
+FROM python:3.11-slim
 
-# Install Linux dependencies needed by RDKit
-RUN apt-get update && apt-get install -y \
+# Install system dependencies for RDKit, OpenCV, DECIMER
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     cmake \
-    python3-dev \
-    libxrender1 \
-    libsm6 \
-    libxext6 \
-    libglib2.0-0 \
-    libboost-all-dev \
     git \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
+    wget \
     libgl1 \
     libglib2.0-0 \
- && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
-
-# Install Python packages
-# RDKit from PyPI, TensorFlow CPU, Flask, DECIMER dependencies
-RUN pip install --upgrade pip
-RUN pip install rdkit-pypi tensorflow-cpu flask pillow numpy
-RUN pip install gunicorn
-
-# Install DECIMER (via pip)
-RUN pip install decimer  # DECIMER PyPI package
-
-# Copy your project files
+# Set working directory
 WORKDIR /app
-COPY . /app
-# Copy the rest of the app
-COPY . .
-# Expose is optional, just for documentation
-EXPOSE 5000
 
-# Use shell form to expand $PORT
-CMD gunicorn --bind 0.0.0.0:$PORT app:app
+# Copy requirements.txt and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the app code
+COPY . .
+
+# Expose the port Render expects
+ENV PORT=10000
+
+# Run the app with Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
