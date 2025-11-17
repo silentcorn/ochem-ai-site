@@ -33,9 +33,9 @@ RUN pip install decimer  # DECIMER PyPI package
 # Copy your project files
 WORKDIR /app
 COPY . /app
-
+# Copy the rest of the app
+COPY . .
 # Expose the port Render will use
-EXPOSE 10000
-
+EXPOSE $PORT
 # Run your app with Gunicorn for production
-CMD ["gunicorn", "--bind", "0.0.0.0:{PORT}", "app:app"]
+CMD gunicorn --bind 0.0.0.0:$PORT app:app
