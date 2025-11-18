@@ -16,7 +16,8 @@ UPLOAD_FOLDER = "static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
+MODEL_DIR = "/opt/render/.data/DECIMER-V2"
+os.environ["DECIMER_MODEL_PATH"] = MODEL_DIR
 
 @app.route("/")
 def index():

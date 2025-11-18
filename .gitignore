@@ -1,6 +1,8 @@
 venv/
 ocvenv310/
 
+.opt/render/.data/DECIMER-V2/
+
 # Byte-compiled / cached files
 __pycache__/
 *.pyc
