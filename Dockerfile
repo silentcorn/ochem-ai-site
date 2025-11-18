@@ -21,6 +21,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Render injects $PORT automatically — don't override it
-EXPOSE 10000
+EXPOSE $PORT
 # SHELL FORM CMD → environment variables expand correctly
 CMD gunicorn --bind 0.0.0.0:$PORT app:app
