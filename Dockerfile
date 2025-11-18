@@ -22,6 +22,5 @@ COPY . .
 
 # Render injects $PORT automatically — don't override it
 EXPOSE 10000
-
-# Correct start command for Render + Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:${PORT}", "app:app"]
+# SHELL FORM CMD → environment variables expand correctly
+CMD gunicorn --bind 0.0.0.0:$PORT app:app
