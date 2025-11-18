@@ -1,0 +1,8 @@
+venv/
+ocvenv310/
+
+# Byte-compiled / cached files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
