@@ -3,6 +3,6 @@ gunicorn
 numpy
 pillow
 rdkit-pypi
-tensorflow
+tensorflow==2.13.0
 opencv-python-headless
 decimer==2.7.1
