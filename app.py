@@ -1,3 +1,11 @@
+import os
+import time
+
+# Prevent Render from scanning too early
+if os.environ.get("RENDER"):
+    time.sleep(3)
+
+
 from flask import Flask, render_template, request, url_for
 from rdkit import Chem
 from rdkit.Chem import Draw
@@ -87,6 +95,3 @@ def results():
 
 
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
