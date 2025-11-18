@@ -5,4 +5,4 @@ pillow
 rdkit-pypi
 tensorflow
 opencv-python-headless
-decimer==2.7.1  # Replace with exact DECIMER version you are using
+decimer==2.7.1
