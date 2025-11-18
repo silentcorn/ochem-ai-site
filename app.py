@@ -15,8 +15,8 @@ app = Flask(__name__)
 UPLOAD_FOLDER = "static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-
+# fixing slig size limit
+os.environ["DECIMER_MODEL_PATH"] = "/opt/decimer-model"
 
 @app.route("/")
 def index():
