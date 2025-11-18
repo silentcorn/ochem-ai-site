@@ -22,8 +22,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Render sets PORT automatically
+# Expose the Render port (optional, mostly documentation)
 EXPOSE 10000
 
-CMD ["gunicorn", "--bind", "0.0.0.0:${PORT}", "app:app"]
-
+# Use shell form for PORT expansion
+CMD gunicorn --bind 0.0.0.0:$PORT app:app
