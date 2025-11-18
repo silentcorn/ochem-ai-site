@@ -1,6 +1,6 @@
 FROM python:3.10-slim
 
-# Install dependencies for RDKit, TensorFlow, DECIMER (Debian 12 versions)
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     libxrender1 \
     libxext6 \
@@ -15,12 +15,13 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-COPY requirements.txt .
-
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENV PORT=10000
+# Render injects $PORT automatically — don't override it
+EXPOSE 10000
 
-CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
+# Correct start command for Render + Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:${PORT}", "app:app"]
