@@ -1,11 +1,3 @@
-import os
-import time
-
-# Prevent Render from scanning too early
-if os.environ.get("RENDER"):
-    time.sleep(3)
-
-
 from flask import Flask, render_template, request, url_for
 from rdkit import Chem
 from rdkit.Chem import Draw

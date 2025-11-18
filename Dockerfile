@@ -1,6 +1,6 @@
 FROM python:3.10-slim
 
-# Install system dependencies
+# System dependencies for RDKit, TensorFlow (used by DECIMER), and drawing
 RUN apt-get update && apt-get install -y \
     libxrender1 \
     libxext6 \
@@ -15,10 +15,16 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-COPY requirements.txt ./
+# Install Python dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy all program files
 COPY . .
-ENV RENDER=1
-# Render automatically injects $PORT (like 10000)
-CMD ["gunicorn", "--workers", "1", "--threads", "2", "--timeout", "120", "--bind", "0.0.0.0:${PORT}", "app:app"]
+
+# Render sets $PORT automatically
+ENV PORT=10000
+EXPOSE 10000
+
+# Start Gunicorn (matches: app.py -> app variable)
+CMD ["bash", "-lc", "gunicorn --bind 0.0.0.0:$PORT app:app"]
