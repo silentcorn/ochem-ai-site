@@ -57,6 +57,9 @@ def results():
                 # Now filepath can be used in your python logic
                 # example: output_images.append(filepath)
 
+
+            
+
             smiles = predict_SMILES(filepath)
             os.remove(filepath)
             mol = Chem.MolFromSmiles(smiles)
@@ -86,5 +89,5 @@ def results():
 
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+"""if __name__ == "__main__":
+    app.run(debug=True)"""
