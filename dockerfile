@@ -25,7 +25,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy app files
 COPY . .
-
+#
 # Pre-download DECIMER model
 RUN mkdir -p /opt/decimer-model && python download_model.py
 
