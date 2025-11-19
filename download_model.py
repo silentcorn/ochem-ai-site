@@ -13,3 +13,4 @@ Image.new("RGB", (1, 1), color="white").save(dummy_image_path)
 
 # This triggers DECIMER to download the model
 predict_SMILES(dummy_image_path)
+#
