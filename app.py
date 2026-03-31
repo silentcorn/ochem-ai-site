@@ -5,7 +5,6 @@ from rdkit.Chem.Draw import rdMolDraw2D
 from DECIMER import predict_SMILES
 import os
 import uuid
-# To do: ...
 
 #testing again
 
@@ -22,7 +21,7 @@ def index():
     return render_template("index.html")
 
 
-# Results page route (empty for now)
+# Results page route 
 @app.route("/results", methods=["GET", "POST"])
 def results():
     error = None
@@ -40,7 +39,7 @@ def results():
         file = request.files.get("image")
 
 
-        # Run your python logic here
+
         if smiles and smiles.strip() != "":
             mol = Chem.MolFromSmiles(smiles)
             # Generate resonance structures
@@ -54,8 +53,7 @@ def results():
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], unique_name)
                 file.save(filepath)
 
-                # Now filepath can be used in your python logic
-                # example: output_images.append(filepath)
+                
 
 
             
